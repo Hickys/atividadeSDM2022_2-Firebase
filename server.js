@@ -14,23 +14,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", express.static("./front"))
 
 
-app.get('/bandas', function (req, res) {
+app.get('/Filmes', function (req, res) {
     // Pega uma referência para o caminho /bandas
-    let bandasRef = ref(database, "/bandas")
+    let bandasRef = ref(database, "/Filmes")
     get(bandasRef).then((snap) => {
         let listaBandas = snap.val()
-        console.log("listaBandas", listaBandas);
+        console.log("listaFilmes", listaBandas);
         return res.status(200).json(listaBandas)
     })
 })
 
-app.post('/bandas', function (req, res) {
+app.post('/Filmes', function (req, res) {
     console.log("recebi requisição POST com body: ",req.body);
     //pega os dados enviados na requisição
     let dados = req.body
     let id = dados.id
     // Pega uma referência para o caminho /bandas/<ID>
-    let novaBandaRef = ref(database, "/bandas/" + id)
+    let novaBandaRef = ref(database, "/Filmes/" + id)
     // Adiciona dados no firebase no caminho /bandas/<ID>
     set(novaBandaRef, dados).then(() => {
         console.log("Adicionado")
@@ -38,13 +38,13 @@ app.post('/bandas', function (req, res) {
     })
 })
 
-app.put('/bandas/:id', function (req, res) {
+app.put('/Filmes/:id', function (req, res) {
     console.log("recebi requisição PUT com body: ",req.body);
     //pega os dados enviados na requisição
     let dados = req.body
     let id = req.params.id
     // Pega uma referência para o caminho /bandas/<ID>
-    let novaBandaRef = ref(database, "/bandas/" + id)
+    let novaBandaRef = ref(database, "/Filmes/" + id)
     // Adiciona dados no firebase no caminho /bandas/<ID>
     set(novaBandaRef, dados).then(() => {
         console.log("Adicionado")
@@ -52,13 +52,13 @@ app.put('/bandas/:id', function (req, res) {
     })
 })
 
-app.delete('/bandas/:id', function (req, res) {
+app.delete('/Filmes/:id', function (req, res) {
     console.log("recebi requisição POST com body: ",req.body);
     //pega os dados enviados na requisição
     let dados = req.body
     let id = req.params.id
     // Pega uma referência para o caminho /bandas/<ID>
-    let novaBandaRef = ref(database, "/bandas/" + id)
+    let novaBandaRef = ref(database, "/Filmes/" + id)
     // Remove /bandas/<ID>
     set(novaBandaRef, null).then(() => {
         console.log("Excluido")
